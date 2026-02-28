@@ -18,7 +18,7 @@
       const test = (source) => {
           return source
               .replaceAll(/CAPPRO (P\d+|\w+),\s*(P\d+|\w+),\s*(\d+|\w+)/gi, `C1MOVE SHIFT($1 BY 0, 0, $3)\nC2MOVE SHIFT($2 BY 0, 0, $3)`)
-              .replaceAll(/CMOVE (P\d+),\s*(P\d+)/gi, `C1MOVE $1\nC2MOVE $2`)
+              .replaceAll(/CMOVE (P\d+|\w+),\s*(P\d+|\w+)/gi, `C1MOVE $1\nC2MOVE $2`)
               .replaceAll(/LAPPRO (P\d+|\w+),\s*(\d+|\w+)\s+LAPPRO (P\d+|\w+),\s*(\d+|\w+)/gi, `LAPPRO $1, $2\nTWAIT 0.1\nLAPPRO $3, $4`)
       }
       document.getElementById('compile').onclick = () => {
