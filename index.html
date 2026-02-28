@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AS++</title>
+  </head>
+  <body>
+    <div class=" p-6 h-screen bg-red-700 flex overflow-hidden justify-center" id="app">
+      <textarea id="input" class="p-3 m-2 bg-amber-600 w-1/3 rounded-2xl text-white"></textarea>
+      <div class="w-1/3 flex justify-center items-center">
+        <button id="compile" class="p-4 max-h-1/6 bg-amber-300 rounded-2xl">Compile</button>
+      </div>
+      <textarea id="output" class="p-3 m-2 bg-blue-800 w-1/3 rounded-2xl text-white"></textarea>
+    </div>
+    <script>
+      const test = (source) => {
+          return source
+              .replaceAll(/CAPPRO (P\d+|\w+),\s*(P\d+|\w+),\s*(\d+|\w+)/gi, `C1MOVE SHIFT($1 BY 0, 0, $3)\nC2MOVE SHIFT($2 BY 0, 0, $3)`)
+              .replaceAll(/CMOVE (P\d+),\s*(P\d+)/gi, `C1MOVE $1\nC2MOVE $2`)
+              .replaceAll(/LAPPRO (P\d+|\w+),\s*(\d+|\w+)\s+LAPPRO (P\d+|\w+),\s*(\d+|\w+)/gi, `LAPPRO $1, $2\nTWAIT 0.1\nLAPPRO $3, $4`)
+      }
+      document.getElementById('compile').onclick = () => {
+          document.querySelector("#output").value = test(document.querySelector("#input").value)
+      }
+    </script>
+  </body>
+</html>
